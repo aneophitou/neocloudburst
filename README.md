@@ -18,27 +18,35 @@ By **Andreas Neobyte**. Inspired by Strymon Cloudburst character; original DSP a
 
 Signal: Input/Demo → dry + predelay → FDN cloud tank → tone → mod → mix. Freeze recirculates the tank with soft limiting.
 
-## Factory presets
+## Factory presets (v2)
 
-Named presets live in `presets/factory-presets.json` and `Source/Presets/FactoryPresets.h` (keep in sync). Standalone UI preset menu is not wired yet — the offline showcase renderer loads the C++ table.
+Named presets live in `presets/factory-presets.json` and `Source/Presets/FactoryPresets.h` (keep in sync). Freeze/cloud is tuned as a **light synth-like bloom** behind the dry. Standalone UI preset menu is not wired yet — the offline showcase renderer loads the C++ table.
 
 | Preset | Character |
 |--------|-----------|
 | Bright Room | Short bright ambience |
-| Dark Cloud | Long dark wash |
-| Slap Bloom | Audible pre-delay into the cloud |
-| Swirl | High modulation |
-| Freeze Pad | Freeze after a hit; dry continues |
+| Air Bloom | Light airy bloom |
+| Soft Halo | Everyday soft halo |
+| Slap Bloom | Audible pre-delay into a light cloud |
+| Swirl | High Mod, still airy |
+| Glass Hold | Subtle Freeze — glassy synth pad |
+| Freeze Pad | Classic Freeze, light behind dry |
+| Synth Bloom | Freeze-forward synth wash |
+| Velvet Pad | Soft Freeze + gentle Mod |
 | Infinite Wash | Near-infinite Decay, soft Mix |
-| Soft Halo | Balanced everyday bloom |
-| Wide Sky | Spacious sky pad |
+| Wide Sky | Spacious airy sky pad |
+| Halo Drift | Slow Mod over light long cloud |
+| Light Sustain | Subtle Freeze for clean leads |
+| Dusk Veil | Slightly darker veil, still clear |
 
 ### Presets showcase (phone)
 
-Continuous Demo walkthrough with chime + spoken name markers:
+**v2** (softer Freeze) — continuous Demo walkthrough with chime + spoken name markers:
 
-- [`demos/neocloudburst-presets-showcase.m4a`](demos/neocloudburst-presets-showcase.m4a) (AAC)
-- [`demos/neocloudburst-presets-showcase.wav`](demos/neocloudburst-presets-showcase.wav)
+- [`demos/neocloudburst-presets-showcase-v2.m4a`](demos/neocloudburst-presets-showcase-v2.m4a) (AAC)
+- [`demos/neocloudburst-presets-showcase-v2.wav`](demos/neocloudburst-presets-showcase-v2.wav)
+
+Release: [`demo-presets-2`](https://github.com/aneophitou/neocloudburst/releases/tag/demo-presets-2)
 
 ```bash
 ./build/NeoCloudBurstShowcase_artefacts/Release/NeoCloudBurstShowcase /tmp/out.wav /tmp/cues.json
