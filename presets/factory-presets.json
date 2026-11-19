@@ -1,0 +1,105 @@
+{
+  "author": "Andreas Neobyte",
+  "plugin": "NeoCloudBurst",
+  "version": 1,
+  "notes": "Factory presets for showcase / later Standalone UI wiring. Values: mix/decay/tone/mod 0..1, preDelayMs 0..250, freeze bool.",
+  "presets": [
+    {
+      "id": "bright-room",
+      "name": "Bright Room",
+      "description": "Short bright ambience — low Decay, bright Tone, light Mix",
+      "mix": 0.28,
+      "decay": 0.28,
+      "preDelayMs": 18.0,
+      "tone": 0.82,
+      "mod": 0.12,
+      "freeze": false,
+      "showcaseSeconds": 5.5
+    },
+    {
+      "id": "dark-cloud",
+      "name": "Dark Cloud",
+      "description": "Long dark cloud — high Decay, dark Tone, lush Mix",
+      "mix": 0.62,
+      "decay": 0.88,
+      "preDelayMs": 55.0,
+      "tone": 0.18,
+      "mod": 0.22,
+      "freeze": false,
+      "showcaseSeconds": 7.0
+    },
+    {
+      "id": "slap-bloom",
+      "name": "Slap Bloom",
+      "description": "Audible pre-delay slap into the cloud",
+      "mix": 0.48,
+      "decay": 0.68,
+      "preDelayMs": 165.0,
+      "tone": 0.55,
+      "mod": 0.18,
+      "freeze": false,
+      "showcaseSeconds": 6.5
+    },
+    {
+      "id": "swirl",
+      "name": "Swirl",
+      "description": "Modulated swirl — high Mod depth",
+      "mix": 0.50,
+      "decay": 0.72,
+      "preDelayMs": 40.0,
+      "tone": 0.48,
+      "mod": 0.92,
+      "freeze": false,
+      "showcaseSeconds": 6.5
+    },
+    {
+      "id": "freeze-pad",
+      "name": "Freeze Pad",
+      "description": "Fill the tank, then Freeze; dry continues while the pad holds",
+      "mix": 0.55,
+      "decay": 0.80,
+      "preDelayMs": 45.0,
+      "tone": 0.38,
+      "mod": 0.25,
+      "freeze": false,
+      "freezeAfterSeconds": 2.4,
+      "showcaseSeconds": 7.5
+    },
+    {
+      "id": "infinite-wash",
+      "name": "Infinite Wash",
+      "description": "Near-infinite wash — max Decay, soft Mix",
+      "mix": 0.32,
+      "decay": 1.0,
+      "preDelayMs": 70.0,
+      "tone": 0.35,
+      "mod": 0.30,
+      "freeze": false,
+      "showcaseSeconds": 7.0
+    },
+    {
+      "id": "soft-halo",
+      "name": "Soft Halo",
+      "description": "Balanced soft bloom behind the dry — everyday ambient",
+      "mix": 0.40,
+      "decay": 0.58,
+      "preDelayMs": 35.0,
+      "tone": 0.45,
+      "mod": 0.28,
+      "freeze": false,
+      "showcaseSeconds": 5.5
+    },
+    {
+      "id": "wide-sky",
+      "name": "Wide Sky",
+      "description": "Spacious sky pad — long Decay, medium Pre-Delay, airy Tone",
+      "mix": 0.52,
+      "decay": 0.90,
+      "preDelayMs": 95.0,
+      "tone": 0.62,
+      "mod": 0.40,
+      "freeze": false,
+      "showcaseSeconds": 6.5
+    }
+  ]
+}

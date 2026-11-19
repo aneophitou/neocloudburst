@@ -1,0 +1,17 @@
+build/
+Dist/
+cmake-build-*/
+.idea/
+.vscode/
+*.user
+*.o
+*.a
+*.so
+*.vst3/
+*.lv2/
+.DS_Store
+*.wav
+*.m4a
+!demos/*.wav
+!demos/*.m4a
+!presets/**/*.wav
