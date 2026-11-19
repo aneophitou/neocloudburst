@@ -1,0 +1,41 @@
+name: Materialize demo audio
+
+on:
+  push:
+    paths:
+      - "demos-src/**"
+      - ".github/workflows/materialize-demos.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  materialize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Decode demos
+        run: |
+          set -euo pipefail
+          mkdir -p demos
+          base64 -d demos-src/neocloudburst-smoke.m4a.b64 > demos/neocloudburst-smoke.m4a
+          cat demos-src/neocloudburst-smoke.wav.b64.part* > /tmp/wav.b64
+          base64 -d /tmp/wav.b64 > demos/neocloudburst-smoke.wav
+          sha256sum demos/*
+          expected_m4a=319b80a290ea950b0f5f7a7436cffb239f8899c0bcecad7129d437ed061ad992
+          expected_wav=48bd83c88440ee0106ed4f0fd2d06dcfc864b4b54fc0635c369bd375247602b0
+          test "$(sha256sum demos/neocloudburst-smoke.m4a | awk '{print $1}')" = "$expected_m4a"
+          test "$(sha256sum demos/neocloudburst-smoke.wav | awk '{print $1}')" = "$expected_wav"
+      - name: Commit demos if needed
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add demos/neocloudburst-smoke.m4a demos/neocloudburst-smoke.wav
+          if git diff --cached --quiet; then
+            echo "No demo changes"
+            exit 0
+          fi
+          git commit -m "Add NeoCloudBurst Demo→Freeze smoke audio (m4a + wav)"
+          git push
