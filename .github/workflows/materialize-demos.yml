@@ -19,8 +19,9 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p demos
-          base64 -d demos-src/neocloudburst-smoke.m4a.b64 > demos/neocloudburst-smoke.m4a
-          cat demos-src/neocloudburst-smoke.wav.b64.part* > /tmp/wav.b64
+          cat demos-src/m4a.part* > /tmp/m4a.b64
+          cat demos-src/wav.part* > /tmp/wav.b64
+          base64 -d /tmp/m4a.b64 > demos/neocloudburst-smoke.m4a
           base64 -d /tmp/wav.b64 > demos/neocloudburst-smoke.wav
           sha256sum demos/*
           expected_m4a=319b80a290ea950b0f5f7a7436cffb239f8899c0bcecad7129d437ed061ad992
