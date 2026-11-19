@@ -9,7 +9,10 @@
  *
  * Multi-delay FDN tank with input diffusion, variable pre-delay,
  * decay → near-infinite wash, tone tilt, slow modulation, and Freeze
- * latch with soft energy limiting (warm pad, not ice-pick).
+ * latch with soft energy limiting.
+ *
+ * v2 Freeze character: airy / glassy synth pad behind the dry —
+ * low-mid scoop + HF retention when frozen (not a muddy wall).
  */
 class CloudReverbEngine
 {
@@ -49,6 +52,7 @@ private:
         int index = 0;
         int size = 1;
         float filterState = 0.0f;
+        float hpState = 0.0f; // per-line freeze HPF state
         float modPhase = 0.0f;
     };
 
@@ -70,7 +74,6 @@ private:
     int preDelayWrite = 0;
     float preDelaySamples = 1.0f;
 
-    float decayGain = 0.85f;
     float dampCoeff = 0.0f;
     float brightCoeff = 0.0f;
     float toneLpStateL = 0.0f;
@@ -78,9 +81,12 @@ private:
     float toneHpStateL = 0.0f;
     float toneHpStateR = 0.0f;
     float inputHpCoeff = 0.0f;
+    float freezeHpCoeff = 0.0f;
+    float freezeAirCoeff = 0.0f;
     std::array<float, 2> inputHpState { 0.0f, 0.0f };
+    std::array<float, 2> freezeOutHpState { 0.0f, 0.0f };
+    std::array<float, 2> freezeAirState { 0.0f, 0.0f };
 
-    float modDepth = 0.0f;
     float modPhase = 0.0f;
     float modInc = 0.0f;
 

@@ -34,7 +34,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout NeoCloudBurstAudioProcessor:
         juce::ParameterID { kMixId, 1 },
         "Mix",
         juce::NormalisableRange<float> { 0.0f, 1.0f, 0.001f },
-        0.45f,
+        0.36f,
         juce::AudioParameterFloatAttributes().withLabel ("%")
             .withStringFromValueFunction ([] (float v, int) {
                 return juce::String (juce::roundToInt (v * 100.0f));
@@ -47,7 +47,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout NeoCloudBurstAudioProcessor:
         juce::ParameterID { kDecayId, 1 },
         "Decay",
         juce::NormalisableRange<float> { 0.0f, 1.0f, 0.001f },
-        0.72f,
+        0.62f,
         juce::AudioParameterFloatAttributes().withLabel ("%")
             .withStringFromValueFunction ([] (float v, int) {
                 return juce::String (juce::roundToInt (v * 100.0f));
@@ -67,7 +67,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout NeoCloudBurstAudioProcessor:
         juce::ParameterID { kToneId, 1 },
         "Tone",
         juce::NormalisableRange<float> { 0.0f, 1.0f, 0.001f },
-        0.42f,
+        0.58f,
         juce::AudioParameterFloatAttributes().withLabel ("%")
             .withStringFromValueFunction ([] (float v, int) {
                 return juce::String (juce::roundToInt (v * 100.0f));
@@ -80,7 +80,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout NeoCloudBurstAudioProcessor:
         juce::ParameterID { kModId, 1 },
         "Mod",
         juce::NormalisableRange<float> { 0.0f, 1.0f, 0.001f },
-        0.28f,
+        0.22f,
         juce::AudioParameterFloatAttributes().withLabel ("%")
             .withStringFromValueFunction ([] (float v, int) {
                 return juce::String (juce::roundToInt (v * 100.0f));
@@ -99,7 +99,7 @@ void NeoCloudBurstAudioProcessor::prepareToPlay (double sampleRate, int samplesP
     dryBuffer.setSize (channels, samplesPerBlock, false, false, true);
     demoTone.prepare (sampleRate, channels);
     mixSmoothed.reset (sampleRate, 0.03);
-    mixSmoothed.setCurrentAndTargetValue (0.45f);
+    mixSmoothed.setCurrentAndTargetValue (0.36f);
     updateEnginesFromParameters();
 }
 
