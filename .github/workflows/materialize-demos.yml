@@ -15,6 +15,32 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Fetch demos-src parts from staging
+        run: |
+          set -euo pipefail
+          STAGE_REF="cursor/ncb-demo-host-059e"
+          STAGE_BASE="https://raw.githubusercontent.com/aneophitou/neodelay/${STAGE_REF}/.ncb-demo-staging"
+          rm -rf demos-src
+          mkdir -p demos-src
+          # Prefer tarball when available; fall back to per-part raw URLs
+          if curl -fsSL "${STAGE_BASE}/demos-src.tar.gz" -o /tmp/demos-src.tar.gz; then
+            tar -xzf /tmp/demos-src.tar.gz -C demos-src --strip-components=1
+          else
+            for kind in m4a wav; do
+              i=0
+              while true; do
+                part=$(printf '%s.part%03d' "$kind" "$i")
+                if ! curl -fsSL "${STAGE_BASE}/demos-src/${part}" -o "demos-src/${part}"; then
+                  rm -f "demos-src/${part}"
+                  break
+                fi
+                i=$((i+1))
+              done
+            done
+          fi
+          ls -la demos-src | head
+          test "$(ls demos-src/m4a.part* | wc -l)" -ge 1
+          test "$(ls demos-src/wav.part* | wc -l)" -ge 1
       - name: Decode demos
         run: |
           set -euo pipefail
@@ -28,15 +54,19 @@ jobs:
           expected_wav=48bd83c88440ee0106ed4f0fd2d06dcfc864b4b54fc0635c369bd375247602b0
           test "$(sha256sum demos/neocloudburst-smoke.m4a | awk '{print $1}')" = "$expected_m4a"
           test "$(sha256sum demos/neocloudburst-smoke.wav | awk '{print $1}')" = "$expected_wav"
-      - name: Commit demos if needed
+          test "$(wc -c < demos/neocloudburst-smoke.m4a)" -eq 197263
+          test "$(wc -c < demos/neocloudburst-smoke.wav)" -eq 4233808
+      - name: Commit demos-src and demos
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add demos/neocloudburst-smoke.m4a demos/neocloudburst-smoke.wav
+          git add -A demos-src demos/neocloudburst-smoke.m4a demos/neocloudburst-smoke.wav
+          # Drop leftover probe/partial chunk files not in the staged set
+          git status --short
           if git diff --cached --quiet; then
             echo "No demo changes"
             exit 0
           fi
-          git commit -m "Add NeoCloudBurst Demo→Freeze smoke audio (m4a + wav)"
+          git commit -m "Add NeoCloudBurst Demo→Freeze smoke audio (m4a + wav) and demos-src parts"
           git push
